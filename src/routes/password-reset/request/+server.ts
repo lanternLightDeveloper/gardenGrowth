@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import { db } from '$lib/db/index';
-import { users, password_resets } from '$lib/db/schema';
+import { users, auth_tokens } from '$lib/db/schema';
 import { eq } from 'drizzle-orm';
 import crypto from 'crypto';
 
@@ -16,7 +16,7 @@ export const POST = async ({ request }) => {
 	const token = crypto.randomBytes(32).toString('hex');
 	const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
 
-	await db.insert(password_resets).values({
+	await db.insert(auth_tokens).values({
 		id: crypto.randomUUID(),
 		userId: user.id,
 		token,

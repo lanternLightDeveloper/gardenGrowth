@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import { db } from '$lib/db/index';
-import { users, password_resets } from '$lib/db/schema';
+import { users, auth_tokens } from '$lib/db/schema';
 import { eq } from 'drizzle-orm';
 import argon2 from 'argon2';
 
@@ -13,14 +13,14 @@ export const POST = async ({ request, locals }) => {
 	const { token, password } = await request.json();
 	if (!token || !password) return json({ error: 'Missing token or password' }, { status: 400 });
 
-	const [reset] = await db.select().from(password_resets).where(eq(password_resets.token, token));
+	const [reset] = await db.select().from(auth_tokens).where(eq(auth_tokens.token, token));
 	if (!reset || reset.used === 'true' || reset.expiresAt < new Date())
 		return json({ error: 'Invalid or expired token' }, { status: 400 });
 
 	const passwordHash = await argon2.hash(password);
 
 	await db.update(users).set({ passwordHash }).where(eq(users.id, reset.userId));
-	await db.update(password_resets).set({ used: 'true' }).where(eq(password_resets.id, reset.id));
+	await db.update(auth_tokens).set({ used: 'true' }).where(eq(auth_tokens.id, reset.id));
 
 	return json({ ok: true });
 };

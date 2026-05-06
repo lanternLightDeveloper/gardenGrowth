@@ -1,26 +1,19 @@
 // src/routes/admin/users/+page.server.ts
 import { db } from '$lib/db';
-import { users, authorApplications } from '$lib/db/schema';
+import { users } from '$lib/db/schema';
 import { requireAdmin } from '$lib/db/auth';
 import { eq, and } from 'drizzle-orm';
 
 export async function load({ locals }) {
 	requireAdmin(locals);
 
-	const all = await db
-		.select({
-			id: users.id,
-			name: users.name,
-			email: users.email,
-			createdAt: users.createdAt,
-			role: users.role,
-			applicationStatus: authorApplications.status
-		})
-		.from(users)
-		.leftJoin(
-			authorApplications,
-			and(eq(authorApplications.userId, users.id), eq(authorApplications.status, 'pending'))
-		);
+	const all = await db.select({
+		id: users.id,
+		name: users.name,
+		email: users.email,
+		createdAt: users.createdAt,
+		role: users.role
+	});
 	return { users: all };
 }
 

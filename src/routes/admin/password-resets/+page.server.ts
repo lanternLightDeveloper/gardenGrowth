@@ -1,6 +1,6 @@
 // /routes/admin/+page.server.ts
 import { db } from '$lib/db';
-import { password_resets, users } from '$lib/db/schema';
+import { auth_tokens, users } from '$lib/db/schema';
 import { eq } from 'drizzle-orm';
 import { fail } from '@sveltejs/kit';
 import crypto from 'crypto';
@@ -8,13 +8,13 @@ import crypto from 'crypto';
 export async function load() {
 	const resets = await db
 		.select({
-			id: password_resets.id,
+			id: auth_tokens.id,
 			email: users.email,
-			expiresAt: password_resets.expiresAt,
-			used: password_resets.used
+			expiresAt: auth_tokens.expiresAt,
+			used: auth_tokens.used
 		})
-		.from(password_resets)
-		.leftJoin(users, eq(password_resets.userId, users.id));
+		.from(auth_tokens)
+		.leftJoin(users, eq(auth_tokens.userId, users.id));
 
 	return { resets };
 }
@@ -26,7 +26,7 @@ export const actions = {
 
 		if (!id) return fail(400, { error: 'Missing reset ID' });
 
-		const [reset] = await db.select().from(password_resets).where(eq(password_resets.id, id));
+		const [reset] = await db.select().from(auth_tokens).where(eq(auth_tokens.id, id));
 
 		if (!reset) return fail(404, { error: 'Reset not found' });
 		if (reset.used) return fail(400, { error: 'Reset already used' });
@@ -39,7 +39,7 @@ export const actions = {
 		await db.transaction(async (tx) => {
 			await tx.update(users).set({ passwordHash: hash }).where(eq(users.id, reset.userId));
 
-			await tx.update(password_resets).set({ used: true }).where(eq(password_resets.id, id));
+			await tx.update(auth_tokens).set({ used: true }).where(eq(auth_tokens.id, id));
 		});
 
 		return { newPassword };
