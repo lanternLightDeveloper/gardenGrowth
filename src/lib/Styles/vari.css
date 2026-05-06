@@ -1,0 +1,66 @@
+:root{
+/* Spacing */
+--size-1: clamp(0.2rem, 0.5vw, 0.25rem);
+--size-2: clamp(0.4rem, 0.5vw, 0.6rem);
+--size-3: clamp(0.6rem, 1vw, 0.75rem);
+--size-4: clamp(0.75rem, 2vw, 1rem);
+--size-5: clamp(1rem, 2.5vw, 1.25rem);
+--size-6: clamp(1.2rem, 3vw, 1.5rem);
+--size-7: clamp(1.5rem, 5vw, 2.5rem);
+--size-8: clamp(2.25rem, 6.75vw, 3.25rem);
+--size-9: clamp(3rem, 8vw, 5rem);
+--size-10: clamp(5rem, 10vw, 7rem);
+--size-11: clamp(7rem, 12vw, 10rem);
+--size-12: clamp(10rem, 15vw, 15rem);
+--size-13: clamp(15rem, 20vw, 20rem);
+
+/* Page Spacing */
+--space-Top:        5vh 0;
+--space-Side:       0 8vw;
+
+--space-S:         1vh 5vw;
+--space-M:        5vh 10vw;
+--space-L:         15vh 15vw;
+
+--space-Qtr:        5vh 5vw;
+--space-Half:       15vh 8vw;
+--space-Full:       20vh 15vw;
+--space-Full-X:     15vh 5vw 5vh 10vw;
+
+--space-Auto:       15vh auto;
+
+/* Border & Radius */
+--radius-S:           .5rem; 
+--radius-M:           1rem;
+--radius-L:           2rem;
+
+--border:             2px solid var(--border-Color);
+--border-2:             3px solid var(--accent-2);
+
+/* Shadows & Lights */
+--glow-Box:       6px 4px 8px var(--hover), 0 4px 6px var(--hover);
+--glow-Txt:       0 .75px 0.25px var(--bg-1);
+
+--shadow-Box:       0 0 8px var(--accent-2);
+--shadow-Txt:      4px 2px 4px var(--shadow);
+
+/* Opacity */
+--opacity-L:0.25;
+--opacity-M:0.5;
+--opacity-S:0.75;
+
+/* Fonts */
+--font-Main: 'system-ui', -apple-system,  'Segoe UI',  'Open Sans', 'Helvetica Neue', sans-serif;
+--font-Alt: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS',sans-serif;
+
+/* Animation Speed */
+--animation-Speed-Fast: 0.2s;
+--animation-Speed: 0.3s;
+--animation-Speed-Slow: 0.7s;
+--animation-Speed-Long: 10s;
+--animation-Delay:1s;
+--animation-Delay-Long:2s;
+
+--transit:all var(--ani-Speed-Fast) ease-in-out;
+}
+

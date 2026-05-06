@@ -1,0 +1,117 @@
+/* reset styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font-Main);
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100vw;
+	color: var(--txt-1);
+	background: var(--bg-1);
+    line-height: 1.5;
+    overflow-x: hidden;
+    letter-spacing: .05em;
+}
+
+a {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+        transition:  var(--transit);
+    }
+}
+
+h1 {
+    font-size: var(--size-8);
+}
+
+h2 {
+    font-size: var(--size-7);
+}
+
+h3 {
+    font-size: var(--size-6);
+}
+
+p {
+	font-size: var(--size-5); 
+}
+
+img {
+    max-width: 100vw;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.alert, .notice {
+	border: var(--border);
+	padding: 1rem;
+	font-weight: 600;
+	text-align: center;
+    margin: var(--size-4) 0;
+}
+
+.alert {
+    background: var(--accent-2);
+}
+
+.notice {
+    background: var(--accent-1);
+}
+
+.error {
+    color: var(--error);
+}
+
+.success {
+    color: var(--accent-2);
+}
+
+@media (min-width: 1024px) {
+h1 {
+    font-size: var(--size-7);
+}
+
+h2 {
+    font-size: var(--size-6);
+}
+
+h3 {
+    font-size: var(--size-5);
+}
+
+p {
+	font-size: var(--size-4); 
+}
+} 
+
+/* :is(h1, h2, h3, h4, p, .marg_Also) {
+    margin: var(--space-Qtr);
+}
+
+
+@media (min-width: 768px) {
+:is(h1, h2, h3, h4, p, .marg_Also) {
+    margin: var(--space-Half);
+}
+}
+
+
+@media (min-width: 1024px) {
+    :is(h1, h2, h3, h4, p, .marg_Also) {
+    margin: var(--space-Med);
+}
+} 
+
+@media (min-width: 1440px) {
+    :is(h1, h2, h3, h4, p, .marg_Also) {
+    margin: var(--space-Lg);
+}
+}   */

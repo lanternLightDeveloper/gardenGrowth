@@ -1,0 +1,193 @@
+	/* 🦕  🦖🦖🦖 🦕 🦕  Brutalist  💀= 💣 🌠 */
+    .card-Brutal {
+    background: var(--accent-1);
+    padding: 1.4rem;
+    margin: 1rem;
+    min-width: 250px;
+    min-height: 350px;
+    color: #000;
+    font-weight: bold;
+    border-radius: 2px;  
+    display: flex;
+    flex-direction: column;
+
+    img {
+        width: 60%;
+        margin-left: 20%;
+        height: auto;
+    }
+
+    h2 {
+        margin-top: auto;
+    }
+
+    .sizes, .price { 
+        font-size: 1rem; 
+        margin: 0;
+        padding: 0;
+        text-align: left;
+    }
+}
+
+	/* 🦕  🦖🦖🦖 🦕 🦕  Bold Outline  💀= 💣 🌠 */
+.card-BoldOutline {
+    background: #000;
+    padding: 1.5rem;
+    border: 3px solid #ff3333;
+    outline: 3px solid #000;
+    outline-offset: -6px;
+    border-radius: 12px;
+    color: #fff;
+}
+
+	/* 🦕  🦖🦖🦖 🦕 🦕  Sideways skewed  💀= 💣 🌠 */
+.card-SideSkew {
+    background: var(--bg-2);
+    padding: 1.5rem;
+    border: 7px solid var(--accent-1);
+    outline-offset: -6px;
+    transform: skewX(-10deg);
+    width: 35vw;
+}
+
+
+	/* 🦕  🦖🦖🦖 🦕 🦕  Dashed  💀= 💣 🌠 */
+.card-Dashed {
+    background: #141414;
+    color: #ddd;
+    padding: 1.1rem;
+    border-radius: 3px;
+    border: 2px dashed #ff3d3d;
+}
+
+.card-Dashed h3 {
+    margin-bottom: .3rem;
+}
+
+
+	/* 🦕  🦖🦖🦖 🦕 🦕  Small Lines  💀= 💣 🌠 */
+.card-SmallLines {
+    background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+    border: 1px solid #444;
+    padding: 1.2rem;
+    border-radius: 4px;
+    color: #ccc;
+}
+.card-Small-Lines h3 { 
+    border-bottom: 1px solid #444; 
+    padding-bottom: .3rem; 
+}
+
+
+	/* 🦕  🦖🦖🦖 🦕 🦕  Sideline  💀= 💣 🌠 */
+.card-Sideline {
+    background: #111;
+    padding: 1.2rem 1.4rem;
+    border-left: 6px solid #ff2c2c;
+    border-radius: 6px;
+    color: #eee;
+}
+.card-Sideline h3 { margin-top: 0; }
+
+
+	/* 🦕  🦖🦖🦖 🦕 🦕  Topper  💀= 💣 🌠 */
+.card-Topper {
+    background: var(--hallow-Accent);
+    color: #fff;
+    padding: 1.6rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+        width: 85%;
+        height: auto;
+        margin: 0.25rem 0 0 0;
+    }
+
+    h2, h3 {
+        padding: 0;
+        margin:100% 0 0 0;
+    }
+
+    h2, h3, p {
+        background: var(--hallow);
+    }
+
+    .price {
+        font-size: var(--size-6);
+        padding: 0;
+        margin: 2rem 0;
+    }
+    
+	.size-row {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		gap: 0;
+		z-index: 10;
+	}
+
+	.size-badge {
+		width: fit-content;
+		padding: 0.25rem 0.5rem;
+		border-radius: 25%;
+		background: var(--accent-1);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: var(--bg-1);
+		font-weight: bold;
+		border: 2px solid #000;
+		cursor: pointer;
+		transition:
+			transform 0.15s ease,
+			background 0.15s ease;
+	}
+
+	.size-badge:hover {
+		transform: scale(1.1);
+		background: var(--hover);
+	}
+
+    @media only screen and (min-width: 768px) { 
+        height: 45vh;  
+
+        .price {
+            padding: 0;
+            margin:1rem 0;
+        }
+
+        h2 {
+            margin:60% 0 0 0;
+        }
+
+            img {
+        width: 55%;
+    }
+	}
+
+            @media only screen and (min-width: 1024px) { 
+        width: 30vw;
+        height: fit-content;
+
+            h2, h3, p {
+        font-size: var(--size-5);
+    }
+	}
+
+        @media only screen and (min-width: 1440px) { 
+        width: 20vw;
+        height: fit-content; 
+	}
+}
+.card-Topper:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 8px;
+    width: 100%;
+    background: linear-gradient(to right, #900, #f00, #900);
+}
