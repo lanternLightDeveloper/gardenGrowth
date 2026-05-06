@@ -2,6 +2,7 @@ import {
 	pgTable,
 	pgEnum,
 	integer,
+	date,
 	text,
 	timestamp,
 	boolean,
