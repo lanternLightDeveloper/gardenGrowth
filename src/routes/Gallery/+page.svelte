@@ -6,7 +6,6 @@
 	const open = (photo: Photo) => (selected = photo);
 	const close = () => (selected = null);
 
-	// sorted once for now (later this becomes a selector)
 	const gallery = [...photos].sort((a, b) => a.position - b.position);
 
 	const getTitle = (p: Photo) => p.caption ?? p.altTag ?? `Photo ${p.id}`;
@@ -131,7 +130,6 @@
 		opacity: 1;
 	}
 
-	/* Highlight badge */
 	.badge {
 		position: absolute;
 		top: 8px;
@@ -143,8 +141,6 @@
 		font-size: 0.8rem;
 		font-weight: bold;
 	}
-
-	/* Lightbox */
 
 	.lightbox {
 		position: fixed;

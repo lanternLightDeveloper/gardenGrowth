@@ -4,14 +4,12 @@
 	import Test2 from '$lib/Images/04182026-2.jpg';
 </script>
 
-<!-- [ Hero Image ] -->
 <section class="hero">
 	<h1>Garden Growth</h1>
 	<img src={Hero} alt="Seed packets laid out around a garden space" />
 </section>
 
 <main>
-	<!-- [ Week Title + Date ] -->
 	<section class="LastWeek">
 		<h2>Last week in our gardens growth</h2>
 		<p>
@@ -20,22 +18,18 @@
 		</p>
 	</section>
 
-	<!-- [ 3 Highlight Photos ] -->
 	<section class="Highlighter">
 		<img src={Test} alt="" />
 	</section>
 
-	<!-- [ Carousel – Recent Moments ] -->
 	<section class="carousel">
 		<img src={Test2} alt="" />
 	</section>
 
-	<!-- [ Weather Strip ] -->
 	<section class="Weather">
 		<h3>Weather this week:</h3>
 	</section>
 
-	<!-- [ Weekly Note ] -->
 	<section class="PlantPlans">
 		<h3>This week:</h3>
 		<p>
@@ -44,7 +38,6 @@
 		</p>
 	</section>
 
-	<!-- [ Lesson Learned / Small Insight ] -->
 	<section class="LessonLearned">
 		<h4>Lesson Learned</h4>
 		<p>Thing's we read or watched:</p>

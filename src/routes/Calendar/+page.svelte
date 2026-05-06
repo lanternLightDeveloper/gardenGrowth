@@ -160,7 +160,6 @@
 					</div>
 				{/if}
 
-				<!-- tags -->
 				{#if tagsByItemId.get(item.id)?.length}
 					<div class="tags">
 						{#each tagsByItemId.get(item.id) as tag (tag)}
