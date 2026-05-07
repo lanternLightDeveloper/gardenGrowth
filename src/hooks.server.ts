@@ -11,18 +11,18 @@ export const handle: Handle = async ({ event, resolve }) => {
 	/* -----------------------------------------
 	   DEV: mock authenticated admin user
 	------------------------------------------ */
-	if (env.DEV_MOCK_AUTH === 'true') {
-		event.locals.user = {
-			id: 'dev-user',
-			username: 'dev@example.com',
-			name: 'Dev User',
-			role: 'admin'
-		};
+	// if (env.DEV_MOCK_AUTH === 'true') {
+	// 	event.locals.user = {
+	// 		id: 'dev-user',
+	// 		username: 'dev@example.com',
+	// 		name: 'Dev User',
+	// 		role: 'admin'
+	// 	};
 
-		event.locals.csrfToken = 'dev-csrf-token';
+	// 	event.locals.csrfToken = 'dev-csrf-token';
 
-		return resolve(event);
-	}
+	// 	return resolve(event);
+	// }
 
 	/* -----------------------------------------
 	   PROD: real session handling
