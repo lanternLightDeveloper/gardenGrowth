@@ -30,10 +30,12 @@
 		Name
 		<input type="text" bind:value={name} required />
 	</label>
+	<br />
 	<label>
 		Username
 		<input type="username" bind:value={username} required />
 	</label>
+	<br />
 	<label>
 		Password
 		<input type="password" bind:value={password} required />
