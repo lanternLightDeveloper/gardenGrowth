@@ -1,5 +1,5 @@
 <script lang="ts">
-	let email = '';
+	let username = '';
 	let password = '';
 	let name = '';
 	let error = '';
@@ -8,7 +8,7 @@
 		const res = await fetch('/register', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ email, password, name })
+			body: JSON.stringify({ username, password, name })
 		});
 
 		const data = await res.json();
@@ -31,8 +31,8 @@
 		<input type="text" bind:value={name} required />
 	</label>
 	<label>
-		Email
-		<input type="email" bind:value={email} required />
+		Username
+		<input type="username" bind:value={username} required />
 	</label>
 	<label>
 		Password

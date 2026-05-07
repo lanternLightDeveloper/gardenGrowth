@@ -9,7 +9,7 @@ export async function load() {
 	const resets = await db
 		.select({
 			id: auth_tokens.id,
-			email: users.email,
+			username: users.username,
 			expiresAt: auth_tokens.expiresAt,
 			used: auth_tokens.used
 		})

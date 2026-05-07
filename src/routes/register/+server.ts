@@ -15,13 +15,13 @@ export const POST = async ({ request }) => {
 		return json({ error: 'Too many registration attempts. Try again later.' }, { status: 429 });
 	}
 
-	const { email, password, name } = await request.json();
+	const { username, password, name } = await request.json();
 
-	if (!email || !password) {
-		return json({ error: 'Missing email or password' }, { status: 400 });
+	if (!username || !password) {
+		return json({ error: 'Missing username or password' }, { status: 400 });
 	}
 
-	const existing = await db.select().from(users).where(eq(users.email, email)).limit(1);
+	const existing = await db.select().from(users).where(eq(users.username, username)).limit(1);
 
 	if (existing.length > 0) {
 		return json({ error: 'User already exists' }, { status: 400 });
@@ -31,7 +31,7 @@ export const POST = async ({ request }) => {
 
 	await db.insert(users).values({
 		id: crypto.randomUUID(),
-		email,
+		username,
 		passwordHash,
 		name
 	});

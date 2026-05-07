@@ -11,15 +11,15 @@ export const actions = {
 
 		const form = await request.formData();
 		const name = form.get('name');
-		const email = form.get('email');
+		const username = form.get('username');
 
-		if (!name || !email) {
+		if (!name || !username) {
 			return fail(400, { error: 'Missing fields' });
 		}
 
 		await db
 			.update(users)
-			.set({ name: String(name), email: String(email) })
+			.set({ name: String(name), username: String(username) })
 			.where(eq(users.id, locals.user.id));
 
 		return { success: true };

@@ -4,7 +4,7 @@
 	export let data: {
 		csrfToken: string;
 	};
-	let email = '';
+	let username = '';
 	let password = '';
 	let error = '';
 
@@ -15,7 +15,7 @@
 				'Content-Type': 'application/json',
 				'X-CSRF-Token': data.csrfToken
 			},
-			body: JSON.stringify({ email, password })
+			body: JSON.stringify({ username, password })
 		});
 
 		const result = await res.json();
@@ -35,7 +35,7 @@
 	{/if}
 	<label>
 		Username
-		<input type="text" bind:value={email} required />
+		<input type="text" bind:value={username} required />
 	</label>
 	<label>
 		Password

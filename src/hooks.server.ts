@@ -14,7 +14,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (env.DEV_MOCK_AUTH === 'true') {
 		event.locals.user = {
 			id: 'dev-user',
-			email: 'dev@example.com',
+			username: 'dev@example.com',
 			name: 'Dev User',
 			role: 'admin'
 		};
@@ -39,7 +39,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const result = await db
 		.select({
 			userId: users.id,
-			email: users.email,
+			username: users.username,
 			name: users.name,
 			role: users.role,
 			expiresAt: sessions.expiresAt,
@@ -61,7 +61,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	event.locals.user = {
 		id: session.userId,
-		email: session.email,
+		username: session.username,
 		name: session.name,
 		role: session.role
 	};

@@ -10,7 +10,7 @@ export async function load({ locals }) {
 	const all = await db.select({
 		id: users.id,
 		name: users.name,
-		email: users.email,
+		username: users.username,
 		createdAt: users.createdAt,
 		role: users.role
 	});

@@ -8,7 +8,7 @@
 	}>();
 
 	let name = $state(data.user.name);
-	let email = $state(data.user.email);
+	let username = $state(data.user.username);
 	let error = $state('');
 
 	function toggle(id: number) {
@@ -51,7 +51,7 @@
 </script>
 
 <h1>Welcome, {data.user.name}!</h1>
-<p>Username: {data.user.email}</p>
+<p>Username: {data.user.username}</p>
 <p>Role: {data.user.role}</p>
 
 {#if data.user.role === 'user'}
@@ -70,7 +70,7 @@
 	{/if}
 
 	<label>Name: <input type="text" name="name" bind:value={name} /></label>
-	<label>Username: <input type="text" name="email" bind:value={email} /></label>
+	<label>Username: <input type="text" name="username" bind:value={username} /></label>
 
 	<button type="submit">Update</button>
 </form>

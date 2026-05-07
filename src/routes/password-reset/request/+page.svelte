@@ -1,5 +1,5 @@
 <script lang="ts">
-	let email = '';
+	let username = '';
 	let error = '';
 	let success = '';
 
@@ -9,7 +9,7 @@
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ email })
+			body: JSON.stringify({ username })
 		});
 
 		const result = await res.json();
@@ -29,7 +29,7 @@
 
 	<label>
 		Username
-		<input type="text" bind:value={email} required />
+		<input type="text" bind:value={username} required />
 	</label>
 
 	<button type="submit">Request Password Reset</button>

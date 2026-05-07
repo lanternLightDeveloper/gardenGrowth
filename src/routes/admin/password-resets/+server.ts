@@ -16,7 +16,7 @@ export const GET = async ({ locals }) => {
 	const resets = await db
 		.select({
 			id: auth_tokens.id,
-			email: users.email,
+			username: users.username,
 			used: auth_tokens.used,
 			expiresAt: auth_tokens.expiresAt
 		})

@@ -40,7 +40,7 @@
 	<tbody>
 		{#each data.resets as reset}
 			<tr>
-				<td>{reset.email}</td>
+				<td>{reset.username}</td>
 				<td>{new Date(reset.expiresAt).toLocaleString()}</td>
 				<td>{reset.used ? 'Yes' : 'No'}</td>
 				<td>

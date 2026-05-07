@@ -4,7 +4,7 @@
 			users: Array<{
 				id: string;
 				name: string;
-				email: string;
+				username: string;
 				createdAt: string;
 				role: string;
 			}>;
@@ -48,7 +48,7 @@
 		{#if openUserId === user.id}
 			<div id={'user-panel-' + user.id} hidden={openUserId !== user.id} class="content">
 				<p><strong>ID:</strong> {user.id}</p>
-				<p><strong>Username:</strong> {user.email}</p>
+				<p><strong>Username:</strong> {user.username}</p>
 				<p><strong>User's name:</strong> {user.name}</p>
 				<p><strong>Created At:</strong> {user.createdAt}</p>
 

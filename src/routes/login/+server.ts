@@ -19,13 +19,13 @@ export const POST = async ({ request, cookies }) => {
 		return json({ error: 'Too many login attempts. Try again later.' }, { status: 429 });
 	}
 
-	const { email, password } = await request.json();
+	const { username, password } = await request.json();
 
-	if (!email || !password) {
-		return json({ error: 'Missing email or password' }, { status: 400 });
+	if (!username || !password) {
+		return json({ error: 'Missing username or password' }, { status: 400 });
 	}
 
-	const [user] = await db.select().from(users).where(eq(users.email, email));
+	const [user] = await db.select().from(users).where(eq(users.username, username));
 
 	if (!user) {
 		return json({ error: 'Invalid credentials' }, { status: 401 });
