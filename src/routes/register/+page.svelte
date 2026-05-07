@@ -33,7 +33,7 @@
 	<br />
 	<label>
 		Username
-		<input type="username" bind:value={username} required />
+		<input type="text" bind:value={username} required />
 	</label>
 	<br />
 	<label>
