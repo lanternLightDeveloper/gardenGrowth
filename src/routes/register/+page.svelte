@@ -10,11 +10,6 @@
 		loading = true;
 
 		try {
-			console.log('Submitting registration...', {
-				username,
-				name
-			});
-
 			const res = await fetch('/register', {
 				method: 'POST',
 				headers: {
@@ -27,11 +22,7 @@
 				})
 			});
 
-			console.log('Response status:', res.status);
-
 			const data = await res.json();
-
-			console.log('Response data:', data);
 
 			if (!res.ok) {
 				error = data.error ?? 'Something went wrong';
@@ -39,9 +30,7 @@
 			}
 
 			window.location.href = '/login';
-		} catch (err) {
-			console.error('REGISTER CLIENT ERROR:', err);
-
+		} catch {
 			error = 'Unexpected error occurred';
 		} finally {
 			loading = false;
