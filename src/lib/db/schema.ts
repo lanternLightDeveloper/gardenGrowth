@@ -22,7 +22,7 @@ export const users = pgTable('users', {
 	role: userRole('role').notNull().default('user'),
 	createdAt: timestamp('created_at').defaultNow(),
 	updatedAt: timestamp('updated_at').defaultNow(),
-	usernameVerified: boolean('email_verified').notNull().default(false),
+	usernameVerified: boolean('username_verified').notNull().default(false),
 	lastLoginAt: timestamp('last_login_at'),
 	deletedAt: timestamp('deleted_at')
 });
