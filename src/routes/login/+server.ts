@@ -1,7 +1,7 @@
 // login/+server.ts
 
 import { json } from '@sveltejs/kit';
-import { db } from '$lib/db/index';
+import { db } from '$lib/db';
 import { users, sessions } from '$lib/db/schema';
 import { rateLimit } from '$lib/db/rateLimit';
 import { eq } from 'drizzle-orm';

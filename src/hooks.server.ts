@@ -3,7 +3,7 @@ import type { Handle } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 
 // Only import DB stuff when needed
-import { db } from '$lib/db/index';
+import { db } from '$lib/db';
 import { users, sessions } from '$lib/db/schema';
 import { eq } from 'drizzle-orm';
 
