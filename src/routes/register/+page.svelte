@@ -3,22 +3,49 @@
 	let password = '';
 	let name = '';
 	let error = '';
+	let loading = false;
 
 	async function submitForm() {
-		const res = await fetch('/register', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ username, password, name })
-		});
+		error = '';
+		loading = true;
 
-		const data = await res.json();
+		try {
+			console.log('Submitting registration...', {
+				username,
+				name
+			});
 
-		if (!res.ok) {
-			error = data.error;
-			return;
+			const res = await fetch('/register', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					username,
+					password,
+					name
+				})
+			});
+
+			console.log('Response status:', res.status);
+
+			const data = await res.json();
+
+			console.log('Response data:', data);
+
+			if (!res.ok) {
+				error = data.error ?? 'Something went wrong';
+				return;
+			}
+
+			window.location.href = '/login';
+		} catch (err) {
+			console.error('REGISTER CLIENT ERROR:', err);
+
+			error = 'Unexpected error occurred';
+		} finally {
+			loading = false;
 		}
-
-		window.location.href = '/login';
 	}
 </script>
 
@@ -26,19 +53,29 @@
 	{#if error}
 		<p class="error">{error}</p>
 	{/if}
+
 	<label>
 		Name
 		<input type="text" bind:value={name} required />
 	</label>
+
 	<br />
+
 	<label>
 		Username
 		<input type="text" bind:value={username} required />
 	</label>
+
 	<br />
+
 	<label>
 		Password
 		<input type="password" bind:value={password} required />
 	</label>
-	<button type="submit">Sign Up</button>
+
+	<br />
+
+	<button type="submit" disabled={loading}>
+		{loading ? 'Creating Account...' : 'Sign Up'}
+	</button>
 </form>

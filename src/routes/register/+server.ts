@@ -1,10 +1,9 @@
 import { json } from '@sveltejs/kit';
-import { db } from '$lib/db/index';
+import { db } from '$lib/db';
 import { users } from '$lib/db/schema';
 import { rateLimit } from '$lib/db/rateLimit';
 import { eq } from 'drizzle-orm';
 import argon2 from 'argon2';
-import crypto from 'crypto';
 
 export const POST = async ({ request }) => {
 	try {
@@ -18,8 +17,6 @@ export const POST = async ({ request }) => {
 		console.log('IP:', ip);
 
 		if (!rateLimit(`register:${ip}`, 3, 60_000)) {
-			console.log('❌ Rate limit triggered');
-
 			return json({ error: 'Too many registration attempts. Try again later.' }, { status: 429 });
 		}
 
@@ -30,14 +27,12 @@ export const POST = async ({ request }) => {
 		const { username, password, name } = body;
 
 		if (!username || !password) {
-			console.log('❌ Missing username or password');
-
 			return json({ error: 'Missing username or password' }, { status: 400 });
 		}
 
 		const existing = await db.select().from(users).where(eq(users.username, username)).limit(1);
 
-		console.log('Existing users found:', existing.length);
+		console.log('Existing users:', existing);
 
 		if (existing.length > 0) {
 			return json({ error: 'User already exists' }, { status: 400 });
@@ -49,18 +44,13 @@ export const POST = async ({ request }) => {
 
 		console.log('Password hashed');
 
-		const newUser = {
-			id: crypto.randomUUID(),
+		await db.insert(users).values({
 			username,
 			passwordHash,
 			name
-		};
+		});
 
-		console.log('Inserting user:', newUser);
-
-		await db.insert(users).values(newUser);
-
-		console.log('✅ User inserted successfully');
+		console.log('✅ User inserted');
 
 		return json({ ok: true });
 	} catch (err) {
