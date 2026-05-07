@@ -8,25 +8,6 @@ import { users, sessions } from '$lib/db/schema';
 import { eq } from 'drizzle-orm';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	/* -----------------------------------------
-	   DEV: mock authenticated admin user
-	------------------------------------------ */
-	// if (env.DEV_MOCK_AUTH === 'true') {
-	// 	event.locals.user = {
-	// 		id: 'dev-user',
-	// 		username: 'dev@example.com',
-	// 		name: 'Dev User',
-	// 		role: 'admin'
-	// 	};
-
-	// 	event.locals.csrfToken = 'dev-csrf-token';
-
-	// 	return resolve(event);
-	// }
-
-	/* -----------------------------------------
-	   PROD: real session handling
-	------------------------------------------ */
 	const sessionId = event.cookies.get('tt_session');
 
 	event.locals.user = null;
