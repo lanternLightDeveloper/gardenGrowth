@@ -1,5 +1,3 @@
-// src/routes/test/+page.server.ts
-
 import { db } from '$lib/db';
 import { entryItems } from '$lib/db/schema';
 
@@ -15,7 +13,7 @@ export async function load() {
 			.from(entryItems);
 
 		return {
-			items
+			entryItems: items
 		};
 	} catch (err) {
 		console.error('ERROR loading entry items:', err);
