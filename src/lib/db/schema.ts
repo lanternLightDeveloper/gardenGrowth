@@ -68,7 +68,7 @@ export const entries = pgTable(
 	'entries',
 	{
 		id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
-		date: date('date'),
+		date: date('date').notNull(),
 		title: text('title'),
 		createdAt: timestamp('created_at').defaultNow().notNull(),
 		updatedAt: timestamp('updated_at').defaultNow().notNull(),
