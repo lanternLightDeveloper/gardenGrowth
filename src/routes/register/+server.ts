@@ -1,9 +1,10 @@
 import { json } from '@sveltejs/kit';
-import { db } from '$lib/db';
+import { db } from '$lib/db/index';
 import { users } from '$lib/db/schema';
 import { rateLimit } from '$lib/db/rateLimit';
 import { eq } from 'drizzle-orm';
 import argon2 from 'argon2';
+import crypto from 'crypto';
 
 export const POST = async ({ request }) => {
 	try {
@@ -33,6 +34,7 @@ export const POST = async ({ request }) => {
 		const passwordHash = await argon2.hash(password);
 
 		await db.insert(users).values({
+			id: crypto.randomUUID(),
 			username,
 			passwordHash,
 			name
