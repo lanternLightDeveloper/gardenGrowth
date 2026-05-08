@@ -34,7 +34,7 @@ export const sessions = pgTable(
 		userId: integer('user_id')
 			.notNull()
 			.references(() => users.id, { onDelete: 'cascade' }),
-		csrfToken: text('csrf_token').notNull(),
+		csrfToken: text('csrftoken').notNull(),
 		expiresAt: timestamp('expires_at').notNull(),
 		createdAt: timestamp('created_at').defaultNow().notNull(),
 		updatedAt: timestamp('updated_at').defaultNow().notNull(),
