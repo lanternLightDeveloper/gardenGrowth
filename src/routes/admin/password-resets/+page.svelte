@@ -1,4 +1,4 @@
-<!-- routes/admin/password-resets/+page.svelte  -->
+<!-- routes/admin/password-resets/+page.svelte 
 
 <script lang="ts">
 	let { data, form } = $props();
@@ -54,4 +54,4 @@
 			</tr>
 		{/each}
 	</tbody>
-</table>
+</table> -->

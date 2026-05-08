@@ -1,24 +1,24 @@
 <script lang="ts">
-	const { data } = $props<{
-		data: {
-			users: Array<{
-				id: string;
-				name: string;
-				username: string;
-				createdAt: string;
-				role: string;
-			}>;
-		};
-	}>();
+	// const { data } = $props<{
+	// 	data: {
+	// 		users: Array<{
+	// 			id: string;
+	// 			name: string;
+	// 			username: string;
+	// 			createdAt: string;
+	// 			role: string;
+	// 		}>;
+	// 	};
+	// }>();
 
-	let openUserId = $state<string | null>(null);
+	// let openUserId = $state<string | null>(null);
 
 	// function toggle(id: string) {
 	// 	openUserId = openUserId === id ? null : id;
 	// }
 </script>
 
-<h1>User management</h1>
+<!-- <h1>User management</h1> -->
 
 <!-- {#if data?.success}
 	<p class="success">Role updated!</p>
