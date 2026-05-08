@@ -1,5 +1,6 @@
 import { db } from '$lib/db';
 import { entries, entryItems } from '$lib/db/schema';
+import { error } from '@sveltejs/kit';
 
 export const actions = {
 	create: async ({ request, locals }) => {
@@ -14,8 +15,12 @@ export const actions = {
 		const title = data.get('title')?.toString();
 		const date = data.get('date')?.toString();
 
+		if (!title || !date) {
+			throw error(400, 'Missing title or date');
+		}
+
 		await db.transaction(async (tx) => {
-			const [entry] = await tx
+			const result = await tx
 				.insert(entries)
 				.values({
 					title,
@@ -23,6 +28,12 @@ export const actions = {
 					userId: user.id
 				})
 				.returning();
+
+			const entry = result[0];
+
+			if (!entry) {
+				throw error(500, 'Failed to create entry');
+			}
 
 			await tx.insert(entryItems).values([
 				{
