@@ -20,8 +20,8 @@ export const users = pgTable('users', {
 	passwordHash: text('password_hash').notNull(),
 	name: text('name'),
 	role: userRole('role').notNull().default('user'),
-	createdAt: timestamp('created_at').defaultNow(),
-	updatedAt: timestamp('updated_at').defaultNow(),
+	createdAt: timestamp('created_at').defaultNow().notNull(),
+	updatedAt: timestamp('updated_at').defaultNow().notNull(),
 	usernameVerified: boolean('username_verified').notNull().default(false),
 	lastLoginAt: timestamp('last_login_at'),
 	deletedAt: timestamp('deleted_at')
@@ -47,8 +47,8 @@ export const sessions = pgTable(
 
 export const authTokenType = pgEnum('auth_token_type', ['password_reset', 'email_verification']);
 
-export const auth_tokens = pgTable(
-	'auth_tokens',
+export const authTokens = pgTable(
+	'authTokens',
 	{
 		id: text('id').primaryKey(),
 		userId: integer('user_id')

@@ -4,7 +4,6 @@ import { users } from '$lib/db/schema';
 import { rateLimit } from '$lib/db/rateLimit';
 import { eq } from 'drizzle-orm';
 import argon2 from 'argon2';
-import crypto from 'crypto';
 
 export const POST = async ({ request }) => {
 	try {
@@ -19,13 +18,25 @@ export const POST = async ({ request }) => {
 
 		const body = await request.json();
 
-		const { username, password, name } = body;
+		const username = String(body.username ?? '')
+			.trim()
+			.toLowerCase();
+		const password = String(body.password ?? '');
+		const name = String(body.name ?? '').trim();
 
 		if (!username || !password) {
 			return json({ error: 'Missing username or password' }, { status: 400 });
 		}
 
-		const existing = await db.select().from(users).where(eq(users.username, username)).limit(1);
+		if (password.length < 8) {
+			return json({ error: 'Password must be at least 8 characters' }, { status: 400 });
+		}
+
+		const existing = await db
+			.select({ id: users.id })
+			.from(users)
+			.where(eq(users.username, username))
+			.limit(1);
 
 		if (existing.length > 0) {
 			return json({ error: 'User already exists' }, { status: 400 });
@@ -34,14 +45,15 @@ export const POST = async ({ request }) => {
 		const passwordHash = await argon2.hash(password);
 
 		await db.insert(users).values({
-			id: crypto.randomUUID(),
 			username,
 			passwordHash,
-			name
+			name: name || null
 		});
 
 		return json({ ok: true });
-	} catch {
+	} catch (err) {
+		console.error('Register error:', err);
+
 		return json({ error: 'Internal server error' }, { status: 500 });
 	}
 };
