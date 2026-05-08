@@ -10,13 +10,16 @@ export const actions = {
 			throw error(403, 'Forbidden');
 		}
 
-		const data = await request.formData();
+		const body = await request.json();
 
-		const title = data.get('title')?.toString();
-		const date = data.get('date')?.toString();
+		const { title, date, items } = body;
 
 		if (!title || !date) {
 			throw error(400, 'Missing title or date');
+		}
+
+		if (!Array.isArray(items)) {
+			throw error(400, 'Missing items array');
 		}
 
 		await db.transaction(async (tx) => {
@@ -35,14 +38,19 @@ export const actions = {
 				throw error(500, 'Failed to create entry');
 			}
 
-			await tx.insert(entryItems).values([
-				{
-					entryId: entry.id,
-					type: 'note',
-					content: 'First item',
-					position: 0
-				}
-			]);
+			if (items.length > 0) {
+				await tx.insert(entryItems).values(
+					items.map((item, index) => ({
+						entryId: entry.id,
+						type: item.type ?? 'note',
+						title: item.title ?? null,
+						content: item.content ?? null,
+						url: item.url ?? null,
+						highlight: item.highlight ?? false,
+						position: index
+					}))
+				);
+			}
 		});
 
 		return { success: true };
