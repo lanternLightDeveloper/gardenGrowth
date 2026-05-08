@@ -13,17 +13,18 @@
 
 	let openUserId = $state<string | null>(null);
 
-	function toggle(id: string) {
-		openUserId = openUserId === id ? null : id;
-	}
+	// function toggle(id: string) {
+	// 	openUserId = openUserId === id ? null : id;
+	// }
 </script>
 
 <h1>User management</h1>
 
-{#if data?.success}
+<!-- {#if data?.success}
 	<p class="success">Role updated!</p>
-{/if}
+{/if} -->
 
+<!-- 
 {#each data.users as user}
 	<article class="card {user.applicationStatus === 'pending' ? 'highlight' : ''}">
 		{#if user.applicationStatus === 'pending'}
@@ -70,7 +71,7 @@
 			</div>
 		{/if}
 	</article>
-{/each}
+{/each} -->
 
 <style>
 	.card {
