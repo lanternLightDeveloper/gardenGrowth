@@ -1,3 +1,5 @@
+<!-- src/routes/admin/entries/+page.svelte  -->
+
 <script lang="ts">
 	const { data } = $props<{
 		data: {
@@ -13,9 +15,7 @@
 	$inspect(data);
 </script>
 
-<h1>Hello friend</h1>
-
-{#each data.entryItems as item (item)}
+{#each data.entryItems as item (item.id)}
 	<div>
 		<h2>{item.title}</h2>
 		<p>{item.content}</p>
