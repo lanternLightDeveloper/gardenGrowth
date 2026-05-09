@@ -63,7 +63,7 @@
 	}
 </script>
 
-<div class="page">
+<div class="classicForm">
 	<h1>New Entries for the journal</h1>
 
 	<form method="POST" action="?/create" use:enhance={enhanceHandler}>
@@ -118,91 +118,3 @@
 		{/if}
 	</form>
 </div>
-
-<style>
-	.page {
-		max-width: 520px;
-		margin: 3rem auto;
-		padding: 2rem;
-		font-family:
-			system-ui,
-			-apple-system,
-			sans-serif;
-	}
-
-	h1 {
-		font-size: 1.6rem;
-		margin-bottom: 1.5rem;
-		letter-spacing: -0.02em;
-	}
-
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: 1.2rem;
-		padding: 1.5rem;
-		border: 1px solid #e5e7eb;
-		border-radius: 14px;
-		background: #fff;
-		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-	}
-
-	label {
-		display: flex;
-		flex-direction: column;
-		gap: 0.4rem;
-		font-size: 0.9rem;
-		color: #374151;
-	}
-
-	input {
-		padding: 0.65rem 0.75rem;
-		border: 1px solid #d1d5db;
-		border-radius: 10px;
-		font-size: 0.95rem;
-		transition:
-			border 0.15s ease,
-			box-shadow 0.15s ease;
-		background: #fafafa;
-	}
-
-	input:focus {
-		outline: none;
-		border-color: #6366f1;
-		box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
-		background: #fff;
-	}
-
-	button {
-		margin-top: 0.5rem;
-		padding: 0.75rem 1rem;
-		border: none;
-		border-radius: 10px;
-		background: #111827;
-		color: white;
-		font-weight: 500;
-		cursor: pointer;
-		transition:
-			transform 0.08s ease,
-			background 0.2s ease;
-	}
-
-	button:hover {
-		background: #1f2937;
-	}
-
-	button:active {
-		transform: scale(0.98);
-	}
-
-	button:disabled {
-		opacity: 0.6;
-		cursor: not-allowed;
-	}
-
-	p {
-		margin-top: 0.5rem;
-		font-size: 0.9rem;
-		color: #16a34a;
-	}
-</style>

@@ -1,4 +1,4 @@
-import { db } from '$lib/db';
+import { db } from '$lib/db/index';
 import { entryItems } from '$lib/db/schema';
 
 export async function load() {

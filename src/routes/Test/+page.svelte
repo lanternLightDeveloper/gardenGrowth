@@ -21,5 +21,3 @@
 		<p>{item.content}</p>
 	</div>
 {/each}
-
-<!-- <p>DB time: {data.time}</p> -->
