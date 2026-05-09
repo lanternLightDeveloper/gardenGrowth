@@ -10,17 +10,18 @@ export const actions = {
 			throw error(403, 'Forbidden');
 		}
 
-		const body = await request.json();
+		const data = await request.formData();
 
-		const { title, date, items } = body;
+		const title = data.get('title')?.toString();
+		const date = data.get('date')?.toString();
+
+		const itemsRaw = data.get('items')?.toString();
 
 		if (!title || !date) {
 			throw error(400, 'Missing title or date');
 		}
 
-		if (!Array.isArray(items)) {
-			throw error(400, 'Missing items array');
-		}
+		const items = itemsRaw ? JSON.parse(itemsRaw) : [];
 
 		await db.transaction(async (tx) => {
 			const result = await tx

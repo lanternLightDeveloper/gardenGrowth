@@ -77,13 +77,15 @@
 	<form method="POST" action="?/create" use:enhance={enhanceHandler}>
 		<label>
 			Title
-			<input type="text" name="title" bind:value={title} placeholder="Entry title" required />
+			<input type="text" name="title" bind:value={title} required />
 		</label>
 
 		<label>
 			Date
 			<input type="date" name="date" bind:value={date} required />
 		</label>
+
+		<input type="hidden" name="items" value={JSON.stringify(items)} />
 
 		<hr />
 
