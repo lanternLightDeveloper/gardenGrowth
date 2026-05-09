@@ -1,3 +1,5 @@
+// +page.server.ts
+
 import { db } from '$lib/db/index';
 import { entries, entryItems } from '$lib/db/schema';
 import { error } from '@sveltejs/kit';

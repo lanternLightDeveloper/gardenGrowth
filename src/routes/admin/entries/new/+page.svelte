@@ -1,3 +1,5 @@
+<!-- +page.svelte  -->
+
 <script lang="ts">
 	import { enhance } from '$app/forms';
 
@@ -10,27 +12,15 @@
 		loading = true;
 		message = '';
 
-		return async ({ formData }) => {
-			const payload = {
-				title: formData.get('title'),
-				date: formData.get('date'),
-				items: items
-			};
-
-			const res = await fetch('?/create', {
-				method: 'POST',
-				headers: {
-					'content-type': 'application/json'
-				},
-				body: JSON.stringify(payload)
-			});
-
+		return async ({ result, update }) => {
 			loading = false;
 
-			if (res.ok) {
+			if (result.type === 'success') {
 				message = 'Entry created successfully';
+
 				title = '';
 				date = '';
+
 				items = [
 					{
 						type: 'note',
@@ -40,6 +30,8 @@
 						highlight: false
 					}
 				];
+
+				await update();
 			} else {
 				message = 'Something went wrong';
 			}
