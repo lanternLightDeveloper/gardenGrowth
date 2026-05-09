@@ -1,4 +1,4 @@
-<!-- +page.svelte  -->
+<!-- +page.svelte  
 
 <script lang="ts">
 	const { data } = $props();
@@ -33,9 +33,9 @@
 		items.splice(i, 1);
 	}
 </script>
-
+-->
 <h1>Update Entries</h1>
-
+<!-- 
 <div class="classicForm">
 	<h1>New Entries for the journal</h1>
 
@@ -90,4 +90,4 @@
 			<p>{message}</p>
 		{/if}
 	</form>
-</div>
+</div> -->
