@@ -11,19 +11,23 @@ export async function load({ params, locals }) {
 
 	const id = Number(params.id);
 
-	const entry = await db.query.entries.findFirst({
-		where: eq(entries.id, id),
-		with: {
-			entryItems: true
-		}
-	});
+	const entry = await db
+		.select()
+		.from(entries)
+		.where(eq(entries.id, id))
+		.then((rows) => rows[0]);
 
 	if (!entry) {
 		throw error(404, 'Entry not found');
 	}
 
+	const items = await db.select().from(entryItems).where(eq(entryItems.entryId, id));
+
 	return {
-		entry
+		entry: {
+			...entry,
+			entryItems: items
+		}
 	};
 }
 
