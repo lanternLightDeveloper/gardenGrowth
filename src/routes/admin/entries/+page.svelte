@@ -4,4 +4,4 @@
 
 <a href="/admin/entries/new">Create</a>
 <a href="/admin/entries/read">Read</a>
-<a href="/admin/entries/update">Update</a>
+<a href="/admin/entries/update">Update/Delete</a>
