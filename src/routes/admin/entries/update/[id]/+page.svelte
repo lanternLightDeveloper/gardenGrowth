@@ -90,4 +90,16 @@
 			<p>{message}</p>
 		{/if}
 	</form>
+	<form method="POST" action="?/delete">
+		<button
+			type="submit"
+			onclick={(e) => {
+				if (!confirm('Delete this entry?')) {
+					e.preventDefault();
+				}
+			}}
+		>
+			Delete Entry
+		</button>
+	</form>
 </div>

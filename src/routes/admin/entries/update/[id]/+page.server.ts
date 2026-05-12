@@ -1,10 +1,8 @@
-// +page.server.ts
-
 import { db } from '$lib/db/index';
 import { entries, entryItems } from '$lib/db/schema';
 import { requireAdmin } from '$lib/db/auth';
 import { eq } from 'drizzle-orm';
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 
 export async function load({ params, locals }) {
 	requireAdmin(locals);
@@ -80,5 +78,15 @@ export const actions = {
 		return {
 			success: true
 		};
+	},
+
+	delete: async ({ params, locals }) => {
+		requireAdmin(locals);
+
+		const id = Number(params.id);
+
+		await db.delete(entries).where(eq(entries.id, id));
+
+		throw redirect(303, '/admin/entries');
 	}
 };
