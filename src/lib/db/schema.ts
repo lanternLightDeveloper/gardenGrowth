@@ -160,22 +160,15 @@ export const photos = pgTable(
 	})
 );
 
-export const weather = pgTable(
-	'weather',
-	{
-		id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
-		entryId: integer('entry_id')
-			.notNull()
-			.references(() => entries.id, { onDelete: 'cascade' }),
-		tempAvg: integer('temp_avg'),
-		tempMin: integer('temp_min'),
-		tempMax: integer('temp_max'),
-		rainTotal: integer('rain_total'),
-		condition: text('condition'),
-		rawJson: jsonb('raw_json'),
-		createdAt: timestamp('created_at').defaultNow().notNull()
-	},
-	(table) => ({
-		entryUnique: uniqueIndex('weather_entry_unique').on(table.entryId)
-	})
-);
+export const weather = pgTable('weather', {
+	id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
+	date: date('date').notNull().unique(),
+	tempAvg: integer('temp_avg'),
+	tempMin: integer('temp_min'),
+	tempMax: integer('temp_max'),
+	rainTotal: numeric('rain_total', { precision: 5, scale: 2 }),
+	weatherCode: integer('weather_code'),
+	rawJson: jsonb('raw_json'),
+	createdAt: timestamp('created_at').defaultNow().notNull(),
+	source: text('source')
+});

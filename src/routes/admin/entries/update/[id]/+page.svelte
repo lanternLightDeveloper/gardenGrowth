@@ -76,7 +76,7 @@
 					<input type="checkbox" bind:checked={item.highlight} />
 				</label>
 
-				<button type="button" onclick={() => removeItem(i)}> Remove </button>
+				<button type="button" onclick={() => removeItem(i)}> Remove item</button>
 			</div>
 		{/each}
 
