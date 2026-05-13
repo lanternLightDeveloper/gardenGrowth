@@ -3,6 +3,8 @@
 	let { data } = $props();
 
 	const w = data.weather;
+
+	console.log(data.weather);
 </script>
 
 {#if !w}
