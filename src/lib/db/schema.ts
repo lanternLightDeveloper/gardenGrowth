@@ -175,7 +175,7 @@ export const weather = pgTable('weather', {
 	sunshineDuration: real('sunshine_duration'),
 	precipProbMax: real('precip_prob_max'),
 	apparentTempMax: real('apparent_temp_max'),
-	apparentTempMin: real('apparent_temp_min'),,
+	apparentTempMin: real('apparent_temp_min'),
 	weatherCode: integer('weather_code'),
 	rawJson: jsonb('raw_json'),
 	createdAt: timestamp('created_at').defaultNow().notNull(),
