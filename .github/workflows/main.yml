@@ -1,0 +1,17 @@
+name: Daily Weather Fetch
+
+on:
+  schedule:
+    - cron: '0 14 * * *'
+  workflow_dispatch: 
+
+jobs:
+  fetch-weather:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call Weather Endpoint
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            https://gardengrowth.lanternlightdevelopment.com/api/weather/fetch
