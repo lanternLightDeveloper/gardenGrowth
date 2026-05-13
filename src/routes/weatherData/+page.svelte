@@ -23,7 +23,13 @@
 			<tr><td>Wind Speed Max</td><td>{w.windSpeedMax}</td></tr>
 			<tr><td>Wind Gust Max</td><td>{w.windGustMax}</td></tr>
 			<tr><td>Humidity Mean</td><td>{w.humidityMean}</td></tr>
-			<tr><td>Sunshine Duration</td><td>{w.sunshineDuration}</td></tr>
+			<tr
+				><td
+					>{Math.floor(w.sunshineDuration / 3600)}h {Math.round(
+						(w.sunshineDuration % 3600) / 60
+					)}m</td
+				></tr
+			>
 			<tr><td>Precip Prob Max</td><td>{w.precipProbMax}</td></tr>
 			<tr><td>Apparent Temp Max</td><td>{w.apparentTempMax}</td></tr>
 			<tr><td>Apparent Temp Min</td><td>{w.apparentTempMin}</td></tr>
