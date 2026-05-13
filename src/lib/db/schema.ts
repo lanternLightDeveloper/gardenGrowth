@@ -5,6 +5,7 @@ import {
 	date,
 	text,
 	timestamp,
+	numeric,
 	boolean,
 	jsonb,
 	primaryKey,
