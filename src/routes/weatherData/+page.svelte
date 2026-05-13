@@ -24,7 +24,7 @@
 			<tr><td>Wind Gust Max</td><td>{w.windGustMax}</td></tr>
 			<tr><td>Humidity Mean</td><td>{w.humidityMean}</td></tr>
 			<tr
-				><td
+				><td>Hours of daylight</td><td
 					>{Math.floor(w.sunshineDuration / 3600)}h {Math.round(
 						(w.sunshineDuration % 3600) / 60
 					)}m</td
