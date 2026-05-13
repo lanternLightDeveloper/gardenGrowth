@@ -45,25 +45,40 @@ export async function fetchWeather() {
 	try {
 		await db.insert(weather).values({
 			date: today,
-			tempAvg: Math.round(
-				(data.daily.temperature_2m_max[index] + data.daily.temperature_2m_min[index]) / 2
-			),
-			tempMin: Math.round(data.daily.temperature_2m_min[index]),
-			tempMax: Math.round(data.daily.temperature_2m_max[index]),
-			rainTotal: data.daily.precipitation_sum[index],
-			weatherCode: data.daily.weather_code[index],
+
+			tempAvg: Math.round((d.temperature_2m_max[index] + d.temperature_2m_min[index]) / 2),
+			tempMin: Math.round(d.temperature_2m_min[index]),
+			tempMax: Math.round(d.temperature_2m_max[index]),
+			rainTotal: d.precipitation_sum[index],
+			weatherCode: d.weather_code[index],
+			windSpeedMax: d.wind_speed_10m_max?.[index] ?? null,
+			windGustMax: d.wind_gusts_10m_max?.[index] ?? null,
+			humidityMean: d.relative_humidity_2m_mean?.[index] ?? null,
+			sunshineDuration: d.sunshine_duration?.[index] ?? null,
+			precipProbMax: d.precipitation_probability_max?.[index] ?? null,
+			apparentTempMax: d.apparent_temperature_max?.[index] ?? null,
+			apparentTempMin: d.apparent_temperature_min?.[index] ?? null,
+
 			rawJson: {
 				daily: {
-					time: data.daily.time[index],
-					temperature_2m_max: data.daily.temperature_2m_max[index],
-					temperature_2m_min: data.daily.temperature_2m_min[index],
-					precipitation_sum: data.daily.precipitation_sum[index],
-					weather_code: data.daily.weather_code[index]
+					time: d.time[index],
+					temperature_2m_max: d.temperature_2m_max[index],
+					temperature_2m_min: d.temperature_2m_min[index],
+					precipitation_sum: d.precipitation_sum[index],
+					weather_code: d.weather_code[index],
+					wind_speed_10m_max: d.wind_speed_10m_max?.[index],
+					wind_gusts_10m_max: d.wind_gusts_10m_max?.[index],
+					relative_humidity_2m_mean: d.relative_humidity_2m_mean?.[index],
+					sunshine_duration: d.sunshine_duration?.[index],
+					precipitation_probability_max: d.precipitation_probability_max?.[index],
+					apparent_temperature_max: d.apparent_temperature_max?.[index],
+					apparent_temperature_min: d.apparent_temperature_min?.[index]
 				},
 				latitude: data.latitude,
 				longitude: data.longitude,
 				timezone: data.timezone
 			},
+
 			source: 'open-meteo'
 		});
 
