@@ -1,8 +1,8 @@
-// $lib/weather/fetch/+server.ts
+// $lib/server/weather/fetchWeather.ts
 import { db } from '$lib/db/index';
 import { weather } from '$lib/db/schema';
 
-export const POST = async () => {
+export async function fetchWeather() {
 	const response = await fetch(
 		'https://api.open-meteo.com/v1/forecast?' +
 			new URLSearchParams({
@@ -21,20 +21,14 @@ export const POST = async () => {
 
 	await db.insert(weather).values({
 		date: data.daily.time[0],
-
 		tempAvg: Math.round((tempMax + tempMin) / 2),
-
 		tempMin,
 		tempMax,
-
 		rainTotal: data.daily.precipitation_sum[0],
-
 		weatherCode: data.daily.weather_code[0],
-
 		rawJson: data,
-
 		source: 'open-meteo'
 	});
 
-	return new Response('ok');
-};
+	return data;
+}
