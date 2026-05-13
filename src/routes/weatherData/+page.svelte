@@ -4,7 +4,7 @@
 
 	const w = data.weather;
 
-	console.log(data.weather);
+	console.log(w);
 </script>
 
 {#if !w}
@@ -15,24 +15,25 @@
 	<table>
 		<tbody>
 			<tr><td>Date</td><td>{w.date}</td></tr>
-			<tr><td>Temp Avg</td><td>{w.temp_avg}</td></tr>
-			<tr><td>Temp Min</td><td>{w.temp_min}</td></tr>
-			<tr><td>Temp Max</td><td>{w.temp_max}</td></tr>
-			<tr><td>Rain Total</td><td>{w.rain_total}</td></tr>
-			<tr><td>Weather Code</td><td>{w.weather_code}</td></tr>
-			<tr><td>Wind Speed Max</td><td>{w.wind_speed_max}</td></tr>
-			<tr><td>Wind Gust Max</td><td>{w.wind_gust_max}</td></tr>
-			<tr><td>Humidity Mean</td><td>{w.humidity_mean}</td></tr>
-			<tr><td>Sunshine Duration</td><td>{w.sunshine_duration}</td></tr>
-			<tr><td>Precip Prob Max</td><td>{w.precip_prob_max}</td></tr>
-			<tr><td>Apparent Temp Max</td><td>{w.apparent_temp_max}</td></tr>
-			<tr><td>Apparent Temp Min</td><td>{w.apparent_temp_min}</td></tr>
+			<tr><td>Temp Avg</td><td>{w.tempAvg}</td></tr>
+			<tr><td>Temp Min</td><td>{w.tempMin}</td></tr>
+			<tr><td>Temp Max</td><td>{w.tempMax}</td></tr>
+			<tr><td>Rain Total</td><td>{w.rainTotal}</td></tr>
+			<tr><td>Weather Code</td><td>{w.weatherCode}</td></tr>
+			<tr><td>Wind Speed Max</td><td>{w.windSpeedMax}</td></tr>
+			<tr><td>Wind Gust Max</td><td>{w.windGustMax}</td></tr>
+			<tr><td>Humidity Mean</td><td>{w.humidityMean}</td></tr>
+			<tr><td>Sunshine Duration</td><td>{w.sunshineDuration}</td></tr>
+			<tr><td>Precip Prob Max</td><td>{w.precipProbMax}</td></tr>
+			<tr><td>Apparent Temp Max</td><td>{w.apparentTempMax}</td></tr>
+			<tr><td>Apparent Temp Min</td><td>{w.apparentTempMin}</td></tr>
 			<tr><td>Source</td><td>{w.source}</td></tr>
 		</tbody>
 	</table>
 
 	<h2>Raw JSON</h2>
-	<pre>{JSON.stringify(w.raw_json, null, 2)}</pre>
+
+	<pre>{JSON.stringify(w.rawJson, null, 2)}</pre>
 {/if}
 
 <style>
