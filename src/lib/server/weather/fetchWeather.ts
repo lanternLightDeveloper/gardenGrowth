@@ -8,7 +8,11 @@ export async function fetchWeather() {
 	url.search = new URLSearchParams({
 		latitude: '47.56732',
 		longitude: '-122.63264',
-		daily: 'temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code',
+		daily:
+			'temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code,' +
+			'wind_speed_10m_max,wind_gusts_10m_max,relative_humidity_2m_mean,' +
+			'sunshine_duration,precipitation_probability_max,' +
+			'apparent_temperature_max,apparent_temperature_min',
 		temperature_unit: 'fahrenheit',
 		timezone: 'America/Los_Angeles'
 	}).toString();
@@ -18,6 +22,7 @@ export async function fetchWeather() {
 	if (!response.ok) {
 		throw new Error(`Open-Meteo error: ${response.status}`);
 	}
+
 	const text = await response.text();
 
 	if (!text) {
