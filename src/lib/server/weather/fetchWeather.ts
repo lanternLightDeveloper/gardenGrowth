@@ -52,7 +52,18 @@ export async function fetchWeather() {
 			tempMax: Math.round(data.daily.temperature_2m_max[index]),
 			rainTotal: data.daily.precipitation_sum[index],
 			weatherCode: data.daily.weather_code[index],
-			rawJson: data,
+			rawJson: {
+				daily: {
+					time: data.daily.time[index],
+					temperature_2m_max: data.daily.temperature_2m_max[index],
+					temperature_2m_min: data.daily.temperature_2m_min[index],
+					precipitation_sum: data.daily.precipitation_sum[index],
+					weather_code: data.daily.weather_code[index]
+				},
+				latitude: data.latitude,
+				longitude: data.longitude,
+				timezone: data.timezone
+			},
 			source: 'open-meteo'
 		});
 
