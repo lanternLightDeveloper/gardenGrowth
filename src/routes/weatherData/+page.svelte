@@ -39,12 +39,11 @@
 	}
 
 	td {
-		border: 1px solid #ddd;
+		border: var(--border);
 		padding: 6px 10px;
 	}
 
 	td:first-child {
 		font-weight: bold;
-		background: #f5f5f5;
 	}
 </style>
