@@ -1,6 +1,7 @@
 <!-- src/routes/weather/+page.svelte -->
 <script lang="ts">
-	export let data;
+	let { data } = $props();
+
 	const w = data.weather;
 </script>
 
