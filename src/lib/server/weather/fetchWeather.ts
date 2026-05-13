@@ -3,8 +3,34 @@ import { db } from '$lib/db/index';
 import { weather } from '$lib/db/schema';
 
 export async function fetchWeather() {
-	const response = await fetch('https://api.open-meteo.com/v1/forecast?...');
-	const data = await response.json();
+	const url = new URL('https://api.open-meteo.com/v1/forecast');
+
+	url.search = new URLSearchParams({
+		latitude: '47.56732',
+		longitude: '-122.63264',
+		daily: 'temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code',
+		temperature_unit: 'fahrenheit',
+		timezone: 'America/Los_Angeles'
+	}).toString();
+
+	const response = await fetch(url);
+
+	if (!response.ok) {
+		throw new Error(`Open-Meteo error: ${response.status}`);
+	}
+	const text = await response.text();
+
+	if (!text) {
+		throw new Error('Open-Meteo returned empty response');
+	}
+
+	let data;
+	try {
+		data = JSON.parse(text);
+	} catch (err) {
+		console.error('Raw Open-Meteo response:', text);
+		throw new Error('Invalid JSON from Open-Meteo');
+	}
 
 	const today = new Date().toLocaleDateString('en-CA', {
 		timeZone: 'America/Los_Angeles'
