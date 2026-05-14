@@ -1,10 +1,11 @@
-<!-- src/routes/weather/+page.svelte -->
 <script lang="ts">
+	import { getWeatherCode } from '$lib/Assets/WeatherCodes.ts';
+
 	let { data } = $props();
 
 	const w = data.weather;
 
-	console.log(w);
+	const weather = getWeatherCode(w.weatherCode);
 </script>
 
 {#if !w}
@@ -19,7 +20,10 @@
 			<tr><td>Temp Min</td><td>{w.tempMin}</td></tr>
 			<tr><td>Temp Max</td><td>{w.tempMax}</td></tr>
 			<tr><td>Rain Total</td><td>{w.rainTotal}</td></tr>
-			<tr><td>Weather Code</td><td>{w.weatherCode}</td></tr>
+			<tr>
+				<td>Weather</td>
+				<td>{weather.icon} {weather.label}</td>
+			</tr>
 			<tr><td>Wind Speed Max</td><td>{w.windSpeedMax}</td></tr>
 			<tr><td>Wind Gust Max</td><td>{w.windGustMax}</td></tr>
 			<tr><td>Humidity Mean</td><td>{w.humidityMean}</td></tr>
