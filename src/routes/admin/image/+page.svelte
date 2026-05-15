@@ -7,6 +7,8 @@
 		const formData = new FormData();
 
 		formData.append('image', file);
+		formData.append('entryId', entryId);
+		formData.append('caption', caption ?? '');
 
 		const response = await fetch('/api/upload', {
 			method: 'POST',

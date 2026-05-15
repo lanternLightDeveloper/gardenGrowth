@@ -30,11 +30,6 @@
 		<h3>Weather this week:</h3>
 	</section>
 
-	<img
-		src="https://imagetest.gardengrowth.lanternlightdevelopment.com/test.png"
-		alt="Test at serving from bucket"
-	/>
-
 	<section class="PlantPlans">
 		<h3>This week:</h3>
 		<p>
