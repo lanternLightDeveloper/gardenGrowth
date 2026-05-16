@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { page } from '$app/state';
+	let { data } = $props();
+
+	const entryId = data.entryId;
 
 	let file = $state<File | null>(null);
 	let caption = $state('');
-
-	const entryId = $derived(page.params.id);
 
 	async function upload() {
 		if (!file) return;
@@ -12,7 +12,7 @@
 		const formData = new FormData();
 
 		formData.append('image', file);
-		formData.append('entryId', entryId);
+		formData.append('entryId', String(entryId));
 		formData.append('caption', caption);
 
 		const response = await fetch('/api/upload', {
@@ -27,6 +27,7 @@
 
 	function handleChange(event: Event) {
 		const target = event.currentTarget as HTMLInputElement;
+
 		file = target.files?.[0] ?? null;
 	}
 </script>
