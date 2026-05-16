@@ -1,12 +1,65 @@
-<!-- +page.svelte  -->
+<!-- +page.svelte -->
 
 <script lang="ts">
 	import { enhance } from '$app/forms';
 
 	let loading = $state(false);
 	let message = $state('');
+
 	let title = $state('');
 	let date = $state('');
+
+	let items = $state([
+		{
+			type: 'note',
+			title: '',
+			content: '',
+			url: '',
+			highlight: false,
+
+			// image fields
+			file: null as File | null,
+			caption: ''
+		}
+	]);
+
+	function addItem() {
+		items.push({
+			type: 'note',
+			title: '',
+			content: '',
+			url: '',
+			highlight: false,
+
+			file: null,
+			caption: ''
+		});
+	}
+
+	function removeItem(i: number) {
+		items.splice(i, 1);
+	}
+
+	function handleImageChange(event: Event, index: number) {
+		const target = event.currentTarget as HTMLInputElement;
+
+		const file = target.files?.[0];
+
+		if (!file) return;
+
+		items[index].file = file;
+	}
+
+	function serializedItems() {
+		return items.map((item) => ({
+			type: item.type,
+			title: item.title,
+			content: item.content,
+			url: item.url,
+			highlight: item.highlight,
+			caption: item.caption
+		}));
+	}
 
 	function enhanceHandler() {
 		loading = true;
@@ -16,6 +69,27 @@
 			loading = false;
 
 			if (result.type === 'success') {
+				const entryId = result.data.entryId;
+
+				for (const item of items) {
+					if (item.type === 'image' && item.file) {
+						const formData = new FormData();
+
+						formData.append('image', item.file);
+						formData.append('entryId', String(entryId));
+						formData.append('caption', item.caption);
+
+						const response = await fetch('/api/upload', {
+							method: 'POST',
+							body: formData
+						});
+
+						const uploadResult = await response.json();
+
+						console.log(uploadResult);
+					}
+				}
+
 				message = 'Entry created successfully';
 
 				title = '';
@@ -27,7 +101,10 @@
 						title: '',
 						content: '',
 						url: '',
-						highlight: false
+						highlight: false,
+
+						file: null,
+						caption: ''
 					}
 				];
 
@@ -37,36 +114,12 @@
 			}
 		};
 	}
-
-	let items = $state([
-		{
-			type: 'note',
-			title: '',
-			content: '',
-			url: '',
-			highlight: false
-		}
-	]);
-
-	function addItem() {
-		items.push({
-			type: 'note',
-			title: '',
-			content: '',
-			url: '',
-			highlight: false
-		});
-	}
-
-	function removeItem(i: number) {
-		items.splice(i, 1);
-	}
 </script>
 
 <div class="classicForm">
 	<h1>New Entries for the journal</h1>
 
-	<form method="POST" action="?/create" use:enhance={enhanceHandler}>
+	<form class="classicForm" method="POST" action="?/create" use:enhance={enhanceHandler}>
 		<label>
 			Title
 			<input type="text" name="title" bind:value={title} required />
@@ -77,7 +130,7 @@
 			<input type="date" name="date" bind:value={date} required />
 		</label>
 
-		<input type="hidden" name="items" value={JSON.stringify(items)} />
+		<input type="hidden" name="items" value={JSON.stringify(serializedItems())} />
 
 		<hr />
 
@@ -90,17 +143,25 @@
 					<option value="reference">Reference</option>
 					<option value="tip">Tip</option>
 					<option value="watered">Watered</option>
+					<option value="image">Image</option>
 				</select>
 
-				<input placeholder="Title" bind:value={item.title} />
+				{#if item.type === 'image'}
+					<input type="file" accept="image/*" onchange={(event) => handleImageChange(event, i)} />
 
-				<textarea placeholder="Content" bind:value={item.content}></textarea>
+					<input placeholder="Caption" bind:value={item.caption} />
+				{:else}
+					<input placeholder="Title" bind:value={item.title} />
 
-				<input placeholder="URL (optional)" bind:value={item.url} />
+					<textarea placeholder="Content" bind:value={item.content}></textarea>
+
+					<input placeholder="URL (optional)" bind:value={item.url} />
+				{/if}
 
 				<label>
 					Highlight
-					<input type="checkbox" bind:value={item.highlight} />
+
+					<input type="checkbox" bind:checked={item.highlight} />
 				</label>
 
 				<button type="button" onclick={() => removeItem(i)}> Remove </button>

@@ -56,6 +56,9 @@ export const actions = {
 			}
 		});
 
-		return { success: true };
+		return {
+			success: true,
+			entryId: entry.id
+		};
 	}
 };
