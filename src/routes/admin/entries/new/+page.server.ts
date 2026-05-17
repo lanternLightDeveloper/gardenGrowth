@@ -25,6 +25,8 @@ export const actions = {
 
 		const items = itemsRaw ? JSON.parse(itemsRaw) : [];
 
+		let createdEntryId: number | null = null;
+
 		await db.transaction(async (tx) => {
 			const result = await tx
 				.insert(entries)
@@ -41,9 +43,13 @@ export const actions = {
 				throw error(500, 'Failed to create entry');
 			}
 
-			if (items.length > 0) {
+			createdEntryId = entry.id;
+
+			const dbItems = items.filter((item: any) => item.type !== 'image');
+
+			if (dbItems.length > 0) {
 				await tx.insert(entryItems).values(
-					items.map((item, index) => ({
+					dbItems.map((item: any, index: number) => ({
 						entryId: entry.id,
 						type: item.type ?? 'note',
 						title: item.title ?? null,
@@ -58,7 +64,7 @@ export const actions = {
 
 		return {
 			success: true,
-			entryId: entry.id
+			entryId: createdEntryId
 		};
 	}
 };
