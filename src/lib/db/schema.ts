@@ -163,7 +163,7 @@ export const photos = pgTable(
 		width: integer('width'),
 		height: integer('height'),
 		fileSize: integer('file_size'),
-		storageKey: text('storage_key'),
+		storageKey: text('storage_key').notNull,
 		mimeType: text('mime_type'),
 		takenAt: timestamp('taken_at'),
 		createdAt: timestamp('created_at').defaultNow().notNull()

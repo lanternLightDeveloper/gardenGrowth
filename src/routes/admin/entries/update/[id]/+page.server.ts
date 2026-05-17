@@ -99,12 +99,14 @@ export const actions = {
 		const entryPhotos = await db.select().from(photos).where(eq(photos.entryId, id));
 
 		for (const photo of entryPhotos) {
-			await r2.send(
-				new DeleteObjectCommand({
-					Bucket: process.env.R2_BUCKET!,
-					Key: photo.storageKey
-				})
-			);
+			if (photo.storageKey) {
+				await r2.send(
+					new DeleteObjectCommand({
+						Bucket: process.env.R2_BUCKET!,
+						Key: photo.storageKey
+					})
+				);
+			}
 		}
 
 		await db.delete(photos).where(eq(photos.entryId, id));
