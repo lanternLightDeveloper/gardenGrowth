@@ -23,7 +23,8 @@ export const POST = async ({ request }) => {
 
 		const buffer = Buffer.from(await file.arrayBuffer());
 
-		const key = `entries/${entryId}/${crypto.randomUUID()}.png`;
+		// const key = `entries/${entryId}/${crypto.randomUUID()}.png`;
+		const key = `entries/${crypto.randomUUID()}.png`;
 
 		await r2.send(
 			new PutObjectCommand({

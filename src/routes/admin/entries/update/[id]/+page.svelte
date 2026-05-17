@@ -30,6 +30,11 @@
 	function removeItem(i: number) {
 		items.splice(i, 1);
 	}
+
+	console.log('FULL DATA', data);
+	console.log('ENTRY', data.entry);
+	console.log('ENTRY ITEMS', data.entry.entryItems);
+	console.log('STATE ITEMS', items);
 </script>
 
 <h1>Update Entries</h1>
@@ -55,6 +60,7 @@
 		<h2>Items</h2>
 
 		{#each items as item, i (i)}
+			<pre>{JSON.stringify(data.entry.entryItems, null, 2)}</pre>
 			<div class="item">
 				<select bind:value={item.type}>
 					<option value="note">Note</option>
