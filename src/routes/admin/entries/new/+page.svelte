@@ -47,14 +47,24 @@
 
 		if (!file) return;
 
-		// compress first
-		const compressedFile = await imageCompression(file, {
-			maxSizeMB: 1, // adjust this
-			maxWidthOrHeight: 1920, // keeps reasonable resolution
-			useWebWorker: true
-		});
+		console.log('original size:', file.size);
 
-		items[index].file = compressedFile;
+		try {
+			const compressed = await imageCompression(file, {
+				maxSizeMB: 1,
+				maxWidthOrHeight: 1920,
+				useWebWorker: true,
+				initialQuality: 0.8
+			});
+
+			console.log('compressed size:', compressed.size);
+
+			// IMPORTANT: fallback check
+			items[index].file = compressed.size < file.size ? compressed : file;
+		} catch (err) {
+			console.error('compression failed, using original file', err);
+			items[index].file = file;
+		}
 	}
 
 	function serializedItems() {
