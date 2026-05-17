@@ -58,7 +58,6 @@
 		<h2>Items</h2>
 
 		{#each items as item, i (i)}
-			<pre>{JSON.stringify(data.entry.entryItems, null, 2)}</pre>
 			<div class="item">
 				<select bind:value={item.type}>
 					<option value="note">Note</option>

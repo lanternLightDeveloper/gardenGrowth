@@ -131,8 +131,6 @@
 
 		<input type="hidden" name="items" value={JSON.stringify(serializedItems())} />
 
-		<hr />
-
 		<h2>Items</h2>
 
 		{#each items as item, i (i)}

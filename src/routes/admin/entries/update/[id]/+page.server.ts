@@ -3,6 +3,10 @@ import { entries, entryItems, photos } from '$lib/db/schema';
 import { requireAdmin } from '$lib/db/auth';
 import { eq } from 'drizzle-orm';
 import { error, redirect } from '@sveltejs/kit';
+import { DeleteObjectCommand } from '@aws-sdk/client-s3';
+import { r2 } from '$lib/server/r2';
+
+console.log(r2);
 
 export async function load({ params, locals }) {
 	requireAdmin(locals);
@@ -91,6 +95,21 @@ export const actions = {
 		requireAdmin(locals);
 
 		const id = Number(params.id);
+
+		const entryPhotos = await db.select().from(photos).where(eq(photos.entryId, id));
+
+		for (const photo of entryPhotos) {
+			await r2.send(
+				new DeleteObjectCommand({
+					Bucket: process.env.R2_BUCKET!,
+					Key: photo.storageKey
+				})
+			);
+		}
+
+		await db.delete(photos).where(eq(photos.entryId, id));
+
+		await db.delete(entryItems).where(eq(entryItems.entryId, id));
 
 		await db.delete(entries).where(eq(entries.id, id));
 
