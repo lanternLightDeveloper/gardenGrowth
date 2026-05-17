@@ -31,10 +31,8 @@
 		items.splice(i, 1);
 	}
 
-	console.log('FULL DATA', data);
 	console.log('ENTRY', data.entry);
 	console.log('ENTRY ITEMS', data.entry.entryItems);
-	console.log('STATE ITEMS', items);
 </script>
 
 <h1>Update Entries</h1>
@@ -70,26 +68,15 @@
 					<option value="image">Image</option>
 				</select>
 
-				{#if item.type === 'image'}
-					<input placeholder="Image URL" bind:value={item.url} />
-
-					{#if item.url}
-						<img src={item.url} alt="" width="200" />
-					{/if}
-				{:else}
-					<input placeholder="Title" bind:value={item.title} />
-
-					<textarea placeholder="Content" bind:value={item.content}></textarea>
-
-					<input placeholder="URL (optional)" bind:value={item.url} />
-
-					<label>
-						Highlight
-						<input type="checkbox" bind:checked={item.highlight} />
-					</label>
-				{/if}
-
 				<button type="button" onclick={() => removeItem(i)}> Remove item </button>
+			</div>
+		{/each}
+
+		<h2>Photos</h2>
+
+		{#each data.entry.photos as photo (photo)}
+			<div class="photo">
+				<img src={photo.url} alt="" width="200" />
 			</div>
 		{/each}
 
