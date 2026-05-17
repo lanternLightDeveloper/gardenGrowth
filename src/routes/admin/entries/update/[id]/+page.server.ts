@@ -1,5 +1,5 @@
 import { db } from '$lib/db/index';
-import { entries, entryItems } from '$lib/db/schema';
+import { entries, entryItems, photos } from '$lib/db/schema';
 import { requireAdmin } from '$lib/db/auth';
 import { eq } from 'drizzle-orm';
 import { error, redirect } from '@sveltejs/kit';
@@ -19,12 +19,19 @@ export async function load({ params, locals }) {
 		throw error(404, 'Entry not found');
 	}
 
-	const items = await db.select().from(entryItems).where(eq(entryItems.entryId, id));
+	const items = await db
+		.select()
+		.from(entryItems)
+		.where(eq(entryItems.entryId, id))
+		.orderBy(entryItems.position);
+
+	const entryPhotos = await db.select().from(photos).where(eq(photos.entryId, id));
 
 	return {
 		entry: {
 			...entry,
-			entryItems: items
+			entryItems: items,
+			photos: entryPhotos
 		}
 	};
 }

@@ -1,5 +1,3 @@
-<!-- +page.svelte  -->
-
 <script lang="ts">
 	const { data } = $props();
 
@@ -63,20 +61,29 @@
 					<option value="reference">Reference</option>
 					<option value="tip">Tip</option>
 					<option value="watered">Watered</option>
+					<option value="image">Image</option>
 				</select>
 
-				<input placeholder="Title" bind:value={item.title} />
+				{#if item.type === 'image'}
+					<input placeholder="Image URL" bind:value={item.url} />
 
-				<textarea placeholder="Content" bind:value={item.content}></textarea>
+					{#if item.url}
+						<img src={item.url} alt="" width="200" />
+					{/if}
+				{:else}
+					<input placeholder="Title" bind:value={item.title} />
 
-				<input placeholder="URL (optional)" bind:value={item.url} />
+					<textarea placeholder="Content" bind:value={item.content}></textarea>
 
-				<label>
-					Highlight
-					<input type="checkbox" bind:checked={item.highlight} />
-				</label>
+					<input placeholder="URL (optional)" bind:value={item.url} />
 
-				<button type="button" onclick={() => removeItem(i)}> Remove item</button>
+					<label>
+						Highlight
+						<input type="checkbox" bind:checked={item.highlight} />
+					</label>
+				{/if}
+
+				<button type="button" onclick={() => removeItem(i)}> Remove item </button>
 			</div>
 		{/each}
 
