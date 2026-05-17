@@ -4,12 +4,12 @@
 
 <h1>Entries</h1>
 
-{#each data.entries as entry (entry.id)}
+{#each data.entries as row (row.entries.id)}
 	<div class="entryCard">
-		<h2>{entry.title}</h2>
+		<h2>{row.entries.title}</h2>
 
-		<p>{entry.date}</p>
+		<p>{row.entries.date}</p>
 
-		<a href={`/admin/entries/update/${entry.id}`}> Edit </a>
+		<a href={`/admin/entries/update/${row.entries.id}`}> Edit </a>
 	</div>
 {/each}
