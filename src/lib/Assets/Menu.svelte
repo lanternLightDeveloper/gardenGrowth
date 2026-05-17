@@ -13,7 +13,8 @@
 	const menuItems = [
 		{ label: 'Home', href: '/', id: 'home' },
 		{ label: 'Gallery', href: '/Gallery', id: 'gallery' },
-		{ label: 'Calendar', href: '/Calendar', id: 'calendar' }
+		{ label: 'Calendar', href: '/Calendar', id: 'calendar' },
+		{ label: 'Admin', href: '/admin', id: 'admin' }
 	];
 
 	const themes = ['dark', 'light', 'colorblind', 'headache'];

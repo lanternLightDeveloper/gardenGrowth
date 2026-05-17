@@ -3,6 +3,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 
+	import imageCompression from 'browser-image-compression';
+
 	let loading = $state(false);
 	let message = $state('');
 
@@ -39,14 +41,20 @@
 		items.splice(i, 1);
 	}
 
-	function handleImageChange(event: Event, index: number) {
+	async function handleImageChange(event: Event, index: number) {
 		const target = event.currentTarget as HTMLInputElement;
-
 		const file = target.files?.[0];
 
 		if (!file) return;
 
-		items[index].file = file;
+		// compress first
+		const compressedFile = await imageCompression(file, {
+			maxSizeMB: 1, // adjust this
+			maxWidthOrHeight: 1920, // keeps reasonable resolution
+			useWebWorker: true
+		});
+
+		items[index].file = compressedFile;
 	}
 
 	function serializedItems() {
