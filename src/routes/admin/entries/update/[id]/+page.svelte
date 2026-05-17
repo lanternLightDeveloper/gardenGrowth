@@ -1,21 +1,34 @@
 <script lang="ts">
 	const { data } = $props();
 
-	let title = $state(data.entry.title ?? '');
-	let date = $state(data.entry.date);
+	type EntryItem = {
+		type: string;
+		title: string;
+		content: string;
+		url: string;
+		highlight: boolean;
+	};
 
-	let items = $state(
-		data.entry.entryItems.map((item) => ({
+	let title = $state('');
+	let date = $state('');
+	let items = $state<EntryItem[]>([]);
+	let loading = $state(false);
+	let message = $state('');
+
+	$effect(() => {
+		if (!data?.entry) return;
+
+		title = data.entry.title ?? '';
+		date = data.entry.date;
+
+		items = data.entry.entryItems.map((item) => ({
 			type: item.type,
 			title: item.title ?? '',
 			content: item.content ?? '',
 			url: item.url ?? '',
 			highlight: item.highlight
-		}))
-	);
-
-	let loading = $state(false);
-	let message = $state('');
+		}));
+	});
 
 	function addItem() {
 		items.push({
@@ -30,16 +43,11 @@
 	function removeItem(i: number) {
 		items.splice(i, 1);
 	}
-
-	console.log('ENTRY', data.entry);
-	console.log('ENTRY ITEMS', data.entry.entryItems);
 </script>
 
 <h1>Update Entries</h1>
 
 <div class="classicForm">
-	<h1>New Entries for the journal</h1>
-
 	<form method="POST" action="?/update">
 		<label>
 			Title
@@ -89,6 +97,7 @@
 			<p>{message}</p>
 		{/if}
 	</form>
+
 	<form method="POST" action="?/delete">
 		<button
 			type="submit"
