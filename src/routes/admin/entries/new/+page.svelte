@@ -51,10 +51,10 @@
 
 		try {
 			const compressed = await imageCompression(file, {
-				maxSizeMB: 1,
-				maxWidthOrHeight: 1920,
+				maxSizeMB: 0.3,
+				maxWidthOrHeight: 1200,
 				useWebWorker: true,
-				initialQuality: 0.8
+				initialQuality: 0.55
 			});
 
 			console.log('compressed size:', compressed.size);
