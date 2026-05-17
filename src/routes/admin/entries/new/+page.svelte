@@ -17,7 +17,6 @@
 			url: '',
 			highlight: false,
 
-			// image fields
 			file: null as File | null,
 			caption: ''
 		}

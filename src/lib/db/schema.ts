@@ -84,7 +84,13 @@ export const entries = pgTable(
 	})
 );
 
-export const entryItemType = pgEnum('entry_item_type', ['note', 'reference', 'tip', 'watered']);
+export const entryItemType = pgEnum('entry_item_type', [
+	'note',
+	'reference',
+	'tip',
+	'watered',
+	'image'
+]);
 
 export const entryItems = pgTable(
 	'entry_items',
