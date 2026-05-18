@@ -157,7 +157,6 @@
 					bind:value={item.type}
 					onchange={() => {
 						if (item.type === 'watered') {
-							item.title = '';
 							item.url = '';
 							item.content = 'AM watered';
 						}
