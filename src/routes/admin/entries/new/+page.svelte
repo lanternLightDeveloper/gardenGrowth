@@ -153,7 +153,16 @@
 
 		{#each items as item, i (i)}
 			<div class="item">
-				<select bind:value={item.type}>
+				<select
+					bind:value={item.type}
+					onchange={() => {
+						if (item.type === 'watered') {
+							item.title = '';
+							item.url = '';
+							item.content = 'AM watered';
+						}
+					}}
+				>
 					<option value="note">Note</option>
 					<option value="reference">Reference</option>
 					<option value="tip">Tip</option>
@@ -165,6 +174,30 @@
 					<input type="file" accept="image/*" onchange={(event) => handleImageChange(event, i)} />
 
 					<input placeholder="Caption" bind:value={item.caption} />
+				{:else if item.type === 'watered'}
+					<div class="watered-options">
+						<label>
+							<input
+								type="radio"
+								name={`watered-${i}`}
+								value="AM"
+								checked={item.content === 'AM watered'}
+								onchange={() => (item.content = 'AM watered')}
+							/>
+							AM
+						</label>
+
+						<label>
+							<input
+								type="radio"
+								name={`watered-${i}`}
+								value="PM"
+								checked={item.content === 'PM watered'}
+								onchange={() => (item.content = 'PM watered')}
+							/>
+							PM
+						</label>
+					</div>
 				{:else}
 					<input placeholder="Title" bind:value={item.title} />
 
