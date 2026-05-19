@@ -14,4 +14,4 @@ jobs:
         run: |
           curl -i --fail -X POST \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            https://gardengrowth.lanternlightdevelopment.com/api/weather/fetch
+            https://gardengrowth.lanternlightdevelopment.com/api/fetch/weather
