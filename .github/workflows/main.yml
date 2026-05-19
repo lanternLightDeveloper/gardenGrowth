@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Call Weather Endpoint
         run: |
-          curl -X POST \
+          curl -i --fail -X POST \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             https://gardengrowth.lanternlightdevelopment.com/api/weather/fetch
